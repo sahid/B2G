@@ -30,7 +30,7 @@ case `uname` in
 	exit -1
 esac
 
-GITREPO=${GITREPO:-"git://github.com/mozilla-b2g/b2g-manifest"}
+GITREPO=${GITREPO:-"https://github.com/sahid/b2g-manifest.git"}
 BRANCH=${BRANCH:-master}
 
 while [ $# -ge 1 ]; do
@@ -81,6 +81,11 @@ case "$1" in
 	;;
 
 "galaxy-nexus")
+	echo DEVICE=maguro >> .tmp-config &&
+	repo_sync $1
+	;;
+
+"galaxy-nexus-l")
 	echo DEVICE=maguro >> .tmp-config &&
 	repo_sync $1
 	;;
@@ -221,6 +226,7 @@ case "$1" in
 	echo Valid devices to configure are:
 	echo - galaxy-s2
 	echo - galaxy-nexus
+	echo - galaxy-nexus-l
 	echo - nexus-4
 	echo - nexus-4-kk
 	echo - nexus-5
